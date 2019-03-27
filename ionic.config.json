@@ -1,0 +1,8 @@
+{
+  "name": "bitacora_hos",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "cb430c9d"
+}

@@ -1,0 +1,397 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title text-center>Horas de servicio</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="container-home">
+    <div>
+        <ion-card>
+            <ion-card-header class="cardHeaderEvents">
+                Total de tiempos
+            </ion-card-header>
+
+            <ion-list>
+                <ion-item class="itemCardResumen">
+                    Conducción
+                    <span item-end>
+            <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.segundosConduccionHhmmss }}
+          </span>
+                </ion-item>
+                <ion-item class="itemCardResumen">
+                    Descanso
+                    <span item-end>
+            <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.segundosDescansoHhmmss }}
+          </span>
+                </ion-item>
+                <ion-item class="itemCardResumen">
+                    Servicio
+                    <span item-end>
+            <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.strHorasServicio +
+        bitacoraProvider.strMinutosServicio
+        + bitacoraProvider.strSegundosServicio }}
+          </span>
+                </ion-item>
+            </ion-list>
+            <span>
+        <!-- Zona horaria : {{ TimeZone }} <br> Minutos ofSet: {{ minutosTimeOfSet }} -->
+      </span>
+            <span class="actualizadoFooter"> {{ bitacoraProvider.fehoraActualSystem | date:'long':'GMT+00000':'es-mx'}}</span>
+        </ion-card>
+    </div>
+    <div>
+        <ion-slides pager="true" style="height: 100% !important;">
+            <ion-slide>
+                <ion-card style="padding:0px;margin:0px;width: 100%;">
+                    <!-- HEADERS TABLE-->
+                    <ion-row>
+                        <ion-col size="2" class="headerTable"></ion-col>
+                        <ion-col size="1" class="headerTable">00</ion-col>
+                        <ion-col size="1" class="headerTable">01</ion-col>
+                        <ion-col size="1" class="headerTable">02</ion-col>
+                        <ion-col size="1" class="headerTable">03</ion-col>
+                        <ion-col size="1" class="headerTable">04</ion-col>
+                        <ion-col size="1" class="headerTable">05</ion-col>
+                        <ion-col size="1" class="headerTable">06</ion-col>
+                        <ion-col size="1" class="headerTable">07</ion-col>
+                        <ion-col size="2" class="headerTable"></ion-col>
+                    </ion-row>
+                    <!-- Conduciendo -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">C</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c0" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c1" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c2" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c3" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c4" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c5" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c6" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c7" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.horasConduccionGB }} HRS
+                            <br>{{ bitacoraProvider.minutosConduccionGB }} M
+                        </ion-col>
+                    </ion-row>
+                    <!-- Descansando -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">D</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d0" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d1" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d2" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d3" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d4" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d5" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d6" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d7" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.horasDescansoGB }} HRS
+                            <br>{{ bitacoraProvider.minutosDescansoGB }} M
+                        </ion-col>
+                    </ion-row>
+                    <!-- Servicio -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">S</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s0" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s1" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s2" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s3" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s4" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s5" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s6" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s7" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.strHorasServicio }} HRS
+                            <br> {{ bitacoraProvider.strMinutosServicio.replace(':','') }} M
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            </ion-slide>
+            <ion-slide>
+                <ion-card style="padding:0px;margin:0px;width: 100%;">
+                    <!-- HEADERS TABLE-->
+                    <ion-row>
+                        <ion-col size="2" class="headerTable"></ion-col>
+                        <ion-col size="1" class="headerTable">08</ion-col>
+                        <ion-col size="1" class="headerTable">09</ion-col>
+                        <ion-col size="1" class="headerTable">10</ion-col>
+                        <ion-col size="1" class="headerTable">11</ion-col>
+                        <ion-col size="1" class="headerTable">12</ion-col>
+                        <ion-col size="1" class="headerTable">13</ion-col>
+                        <ion-col size="1" class="headerTable">14</ion-col>
+                        <ion-col size="1" class="headerTable">15</ion-col>
+                        <ion-col size="2" class="headerTable"></ion-col>
+                    </ion-row>
+                    <!-- Conduciendo -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">C</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c8" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c9" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c10" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c11" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c12" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c13" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c14" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c15" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.horasConduccionGB }} HRS
+                            <br>{{ bitacoraProvider.minutosConduccionGB }} M
+                        </ion-col>
+                    </ion-row>
+                    <!-- Descansando -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">D</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d8" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d9" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d10" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d11" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d12" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d13" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d14" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d15" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.horasDescansoGB }} HRS
+                            <br>{{ bitacoraProvider.minutosDescansoGB }} M
+                        </ion-col>
+                    </ion-row>
+                    <!-- Servicio -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">S</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s8" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s9" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s10" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s11" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s12" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s13" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s14" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s15" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.strHorasServicio }} HRS
+                            <br> {{ bitacoraProvider.strMinutosServicio.replace(':','') }} M
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            </ion-slide>
+            <ion-slide>
+                <ion-card style="padding:0px;margin:0px;width: 100%;">
+                    <!-- HEADERS TABLE-->
+                    <ion-row>
+                        <ion-col size="2" class="headerTable"></ion-col>
+                        <ion-col size="1" class="headerTable">16</ion-col>
+                        <ion-col size="1" class="headerTable">17</ion-col>
+                        <ion-col size="1" class="headerTable">18</ion-col>
+                        <ion-col size="1" class="headerTable">19</ion-col>
+                        <ion-col size="1" class="headerTable">20</ion-col>
+                        <ion-col size="1" class="headerTable">21</ion-col>
+                        <ion-col size="1" class="headerTable">22</ion-col>
+                        <ion-col size="1" class="headerTable">23</ion-col>
+                        <ion-col size="2" class="headerTable"></ion-col>
+                    </ion-row>
+                    <!-- Conduciendo -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">C</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c16" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c17" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c18" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c19" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c20" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c21" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c22" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="c23" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.horasConduccionGB }} HRS
+                            <br>{{ bitacoraProvider.minutosConduccionGB }} M
+                        </ion-col>
+                    </ion-row>
+                    <!-- Descansando -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">D</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d16" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d17" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d18" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d19" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d20" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d21" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d22" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="d23" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.horasDescansoGB }} HRS
+                            <br>{{ bitacoraProvider.minutosDescansoGB }} M
+                        </ion-col>
+                    </ion-row>
+                    <!-- Servicio -->
+                    <ion-row>
+                        <ion-col size="2" class="borderTable">
+                            <div style="height: 70% !important;width: 100% !important; margin-top: 7%;">S</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s16" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s17" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s18" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s19" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s20" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s21" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s22" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="1" class="borderTable">
+                            <div id="s23" class="divGraficaHr">&nbsp;</div>
+                        </ion-col>
+                        <ion-col size="2" class="textTiempo"> {{ bitacoraProvider.strHorasServicio }} HRS
+                            <br> {{ bitacoraProvider.strMinutosServicio.replace(':','') }} M
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </div>
+</ion-content>
