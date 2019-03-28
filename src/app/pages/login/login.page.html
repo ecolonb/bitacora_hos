@@ -16,7 +16,7 @@
         </ion-card-header>
         <ion-card-content>
             <form #formLogin (submit)="loginUserAndPassword(formLogin)" method="POST">
-                <ion-list no-lines>
+                <ion-list no-lines style="margin-bottom: 25px;">
                     <ion-item>
                         <ion-input type="text" id="usuario" name="usuario" placeholder="Usuario"></ion-input>
                     </ion-item>
@@ -33,11 +33,10 @@
                 </ion-button>
             </form>
         </ion-card-content>
-        <ion-row>
+        <ion-row style="padding-top: 10px;">
             <ion-col text-center>
-                <ion-button fill="outline" size="small" (click)="openConfigModal()">
-                    <div>Configuración</div>
-                    <ion-icon slot="end" name="md-settings"></ion-icon>
+                <ion-button fill="outline" size="small" (click)="presentAlertPrompt()" text-center>
+                    <ion-icon name="md-settings"></ion-icon>
                 </ion-button>
             </ion-col>
             <!-- <ion-col text-center>

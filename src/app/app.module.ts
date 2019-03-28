@@ -29,11 +29,12 @@ import { SyncUpService } from './services/sync-up.service';
 import { UsuarioService } from './services/usuario.service';
 import { ActividadProgressTitlePipe } from './pipes/actividad-progress-title.pipe';
 import { Device } from '@ionic-native/device/ngx';
+import { ConfiguracionPage } from './pages/configuracion/configuracion.page';
 
 
 @NgModule({
-  declarations: [AppComponent, ActividadProgressTitlePipe],
-  entryComponents: [],
+  declarations: [AppComponent, ActividadProgressTitlePipe, ConfiguracionPage],
+  entryComponents: [ConfiguracionPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
   providers: [
     StatusBar,

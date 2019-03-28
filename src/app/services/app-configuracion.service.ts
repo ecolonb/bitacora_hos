@@ -50,8 +50,11 @@ export class AppConfiguracionService {
     });
   }
   public getServerEndPoint(): string {
-    return this.ServerEndPoint;
+    console.log('on get server endPoint')
+    return "http://lab.micopiloto.com/dev5/";
+    // return this.ServerEndPoint;
   }
+  
 
   public getToken(): string {
     return this.privateToken;
@@ -81,7 +84,7 @@ export class AppConfiguracionService {
         .catch((ErrorCatch) => {
           reject();
         });
-    }).catch((ErrorCatch) => {});
+    }).catch((ErrorCatch) => { });
 
     return promiseSetToken;
   }

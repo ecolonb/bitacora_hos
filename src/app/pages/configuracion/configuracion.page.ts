@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-configuracion',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfiguracionPage implements OnInit {
 
-  constructor() { }
+  constructor(public navParams: NavParams) { }
 
   ngOnInit() {
+    const data = this.navParams.data;
+    console.log('Data: ', data);
+    setTimeout(() => {
+      data.modal.dismiss();
+    }, 2000)
   }
 
 }

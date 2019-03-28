@@ -40,7 +40,7 @@ export class LoginService {
     private platform: Platform,
     private appConfiguracionProvider: AppConfiguracionService,
     private usuarioProvider: UsuarioService
-  ) {}
+  ) { }
 
   // Funcion para validar sesion retorna un Obervable  -> cambiar metodo Implementar una promesa
   // public validarSesion(
@@ -65,15 +65,17 @@ export class LoginService {
 
   // LOG IN USER_PASSWORD method POST -> Api RESTFul
   public loginUserAndPaswword(ObjLoginDevice: any): Promise<any> {
+    console.log('/ObjLoginDevice: ', ObjLoginDevice)
     let urlEndPointComplety: string = '';
     const promiseLoginUserAndPaswword = new Promise((resolve, reject) => {
       const HEADERS = {
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       };
       const dataSendform = ObjLoginDevice;
-      const serverEndPointConfig: string = this.appConfiguracionProvider
-        .getServerEndPoint()
-        .toLowerCase();
+      const serverEndPointConfig: string = "http://lab.micopiloto.com/dev5/"
+      // this.appConfiguracionProvider
+      //   .getServerEndPoint()
+      //   .toLowerCase();
       // validate ServerEndPoint
       if (
         serverEndPointConfig.substring(
@@ -90,9 +92,11 @@ export class LoginService {
         .post(urlEndPointComplety, dataSendform, HEADERS)
         .toPromise()
         .then(RESULT_DATA => {
+          console.log('RESULT_DATA: ', RESULT_DATA);
           resolve(RESULT_DATA);
         })
         .catch(error => {
+          console.log('Error: ', error)
           reject(error);
         });
     });
@@ -176,23 +180,23 @@ export class LoginService {
         // Dispositivo
         try {
           this.setActivo(false)
-            .then(() => {})
-            .catch(() => {});
+            .then(() => { })
+            .catch(() => { });
           this.storage.remove('sesionOk');
           this.storage.remove('ObjUnidades');
           this.storage.remove('ObjConductor');
-        } catch (error) {}
+        } catch (error) { }
         resolve();
       } else {
         // Desktop webBrowser
         try {
           this.setActivo(false)
-            .then(() => {})
-            .catch(() => {});
+            .then(() => { })
+            .catch(() => { });
           localStorage.removeItem('sesionOk');
           localStorage.removeItem('ObjUnidades');
           localStorage.removeItem('ObjConductor');
-        } catch (error) {}
+        } catch (error) { }
         resolve();
       }
     });

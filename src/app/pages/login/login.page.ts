@@ -10,8 +10,7 @@ import { ConfiguracionPage } from '../configuracion/configuracion.page';
 import { ConfiguracionServicioPage } from '../configuracion-servicio/configuracion-servicio.page';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { LocalTimeActivitysService } from '../../services/local-time-activitys.service'
-
+import { LocalTimeActivitysService } from '../../services/local-time-activitys.service';
 // UniqueDeviceID
 @Component({
   selector: 'app-login',
@@ -22,8 +21,8 @@ export class LoginPage implements OnInit {
 
   // @ViewChild(Slides) slides: Slides;
   public loading: any = undefined;;
-  public ConfiguracionPage: any = ConfiguracionPage;
-  public myModal = this.ModalController.create(this.ConfiguracionPage);
+  public configuracionPage: any = ConfiguracionPage;
+  public myModal = undefined;
   public usuario: string = '';
   public contrasenia: string = '';
   public strLoginOkProvider: string = 'false';
@@ -39,7 +38,7 @@ export class LoginPage implements OnInit {
     public alertController: AlertController,
     private loadingController: LoadingController,
     public LoginProvider: LoginService,
-    private ModalController: ModalController,
+    private modalController: ModalController,
     private bitacoraProvider: BitacoraService,
     private conductorProvider: ConductorService,
     private appConfiguracionProvider: AppConfiguracionService,
@@ -373,12 +372,49 @@ export class LoginPage implements OnInit {
     // this.slides.freeMode = false;
     // this.slides.paginationType = 'progress';
   }
-  public openConfigModal() {
+  public async openConfigModal() {
     // this.myModal.present();
+
+    this.myModal = await this.modalController.create({
+      component: this.configuracionPage,
+      componentProps: { value: 123 }
+    });
+    return await this.myModal.present();
   }
 
   public dismissModal() {
     // this.myModal.dismiss();
+  }
+  async presentAlertPrompt() {
+    const textEx = "http://was.asasa.ssasa.";
+    const alert = await this.alertController.create({
+      header: 'Configuración',
+      inputs: [
+        {
+          name: 'url_endPoint',
+          type: 'text',
+          placeholder: 'Url servicios web',
+          value: textEx
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Guardar',
+          handler: (data) => {
+            console.log('Confirm Ok', data);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
