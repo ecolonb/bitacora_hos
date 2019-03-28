@@ -9,3 +9,81 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+
+.ion-color-teal_blue {
+    --ion-color-base: #5f8ab6;
+    --ion-color-base-rgb: 255,255,0;
+    --ion-color-contrast: #000000;
+    --ion-color-contrast-rgb: 0,0,0;
+    --ion-color-shade: #e0e000;
+    --ion-color-tint: #ffff1a;
+  }
+  .ion-color-midnight_blue {
+      --ion-color-base: #0a2c5a;
+      --ion-color-base-rgb: 255,255,0;
+      --ion-color-contrast: #000000;
+      --ion-color-contrast-rgb: 0,0,0;
+      --ion-color-shade: #e0e000;
+      --ion-color-tint: #ffff1a;
+    }
+    // melon: ,
+    .ion-color-melon {
+      --ion-color-base: #f5a063;
+      --ion-color-base-rgb: 255,255,0;
+      --ion-color-contrast: #000000;
+      --ion-color-contrast-rgb: 0,0,0;
+      --ion-color-shade: #e0e000;
+      --ion-color-tint: #ffff1a;
+    }
+    .ion-color-copiloto {
+        --ion-color-base: #27509b;
+        --ion-color-base-rgb: 255,255,0;
+        --ion-color-contrast: #000000;
+        --ion-color-contrast-rgb: 0,0,0;
+        --ion-color-shade: #e0e000;
+        --ion-color-tint: #ffff1a;
+      }
+      .ion-color-md_tq {
+        --ion-color-base: #4daeda;
+        --ion-color-base-rgb: 255,255,0;
+        --ion-color-contrast: #000000;
+        --ion-color-contrast-rgb: 0,0,0;
+        --ion-color-shade: #e0e000;
+        --ion-color-tint: #ffff1a;
+      }
+      .ion-color-blue_menu {
+        --ion-color-base: #409aff;
+        --ion-color-base-rgb: 255,255,0;
+        --ion-color-contrast: #000000;
+        --ion-color-contrast-rgb: 0,0,0;
+        --ion-color-shade: #e0e000;
+        --ion-color-tint: #ffff1a;
+      }
+       
+      .ion-color-success {
+        --ion-color-base: #9bc46d;
+        --ion-color-base-rgb: 255,255,0;
+        --ion-color-contrast: #000000;
+        --ion-color-contrast-rgb: 0,0,0;
+        --ion-color-shade: #e0e000;
+        --ion-color-tint: #ffff1a;
+      }
+      .ion-color-danger_2 {
+        --ion-color-base: #ff4f56;
+        --ion-color-base-rgb: 255,255,0;
+        --ion-color-contrast: #000000;
+        --ion-color-contrast-rgb: 0,0,0;
+        --ion-color-shade: #e0e000;
+        --ion-color-tint: #ffff1a;
+      }
+    
+    // copiloto: #27509b,
+    // white: white,
+    // md_tq: #4daeda,
+    // blue_menu: #409aff,
+    // success: #9bc46d,
+    // *** melon: #f5a063,
+    //*** midnight_blue: #0a2c5a,
+    // ****teal_blue: #5f8ab6
+//   }

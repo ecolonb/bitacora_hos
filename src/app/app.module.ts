@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { HttpClientModule } from '@angular/common/http';
 // import { BitacoraService } from '../../services/bitacora.service';
 // import { LoginService } from '../../services/login.service';
@@ -25,10 +27,12 @@ import { UnidadService } from './services/unidad.service';
 import { ConductorService } from './services/conductor.service';
 import { SyncUpService } from './services/sync-up.service';
 import { UsuarioService } from './services/usuario.service';
+import { ActividadProgressTitlePipe } from './pipes/actividad-progress-title.pipe';
+import { Device } from '@ionic-native/device/ngx';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ActividadProgressTitlePipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
   providers: [
@@ -36,6 +40,9 @@ import { UsuarioService } from './services/usuario.service';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
+    Diagnostic,
+    UniqueDeviceID,
+    Device,
     BitacoraService,
     LoginService,
     UtilidadesService,
@@ -47,4 +54,4 @@ import { UsuarioService } from './services/usuario.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

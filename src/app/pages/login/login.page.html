@@ -1,9 +1,51 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="copiloto">
+        <ion-title text-center style="padding-top: 7px; padding-bottom: 7px;border: solid 1px #0051a0;">
+            <img src="assets/imgs/mcv6.png">
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+    <ion-card class="cardLogin">
+        <ion-card-header class="cardHeaderLogin">
+            <h2 text-center style="color: #ffffff;font-size: 1.2em;font-weight: bold; word-spacing: 5px;letter-spacing: 2px;margin: 0; padding: 0;">
+                Iniciar sesión
+            </h2>
+        </ion-card-header>
+        <ion-card-content>
+            <form #formLogin (submit)="loginUserAndPassword(formLogin)" method="POST">
+                <ion-list no-lines>
+                    <ion-item>
+                        <ion-input type="text" id="usuario" name="usuario" placeholder="Usuario"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña">
+                        </ion-input>
+                    </ion-item>
+                    <!-- <ion-item>
+                        <ion-button expand="full" fill="outline" color="copiloto" type="submit" style="height: 48px;font-size: 1.2em;text-transform: initial;">Ingresar
+                        </ion-button>
+                    </ion-item> -->
+                </ion-list>
+                <ion-button expand="block" color="copiloto" type="submit"><span class="span-login-button">Entrar</span>
+                </ion-button>
+            </form>
+        </ion-card-content>
+        <ion-row>
+            <ion-col text-center>
+                <ion-button fill="outline" size="small" (click)="openConfigModal()">
+                    <div>Configuración</div>
+                    <ion-icon slot="end" name="md-settings"></ion-icon>
+                </ion-button>
+            </ion-col>
+            <!-- <ion-col text-center>
+                      <button ion-button outline icon-end>
+                        <div>Configuración</div>
+                        <ion-icon name="md-settings"></ion-icon>
+                      </button>
+                    </ion-col> -->
+        </ion-row>
+    </ion-card>
 </ion-content>

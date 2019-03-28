@@ -13,6 +13,9 @@ const routes: Routes = [
     component: ActividadesPage
   }
 ];
+// declarations:[ActStatusPipe], // <---
+//   imports:[CommonModule],
+//   exports:[ActStatusPipe] 
 
 @NgModule({
   imports: [
@@ -20,7 +23,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
+
   ],
   declarations: [ActividadesPage]
 })
-export class ActividadesPageModule {}
+export class ActividadesPageModule { }

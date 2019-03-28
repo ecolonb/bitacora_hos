@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'detalle-item-bitacora', loadChildren: './pages/detalle-item-bitacora/detalle-item-bitacora.module#DetalleItemBitacoraPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'bitacora', loadChildren: './pages/bitacora/bitacora.module#BitacoraPageModule' },
-  { path: 'actividades', loadChildren: './pages/actividades/actividades.module#ActividadesPageModule' }
+  { path: 'actividades/:param', loadChildren: './pages/actividades/actividades.module#ActividadesPageModule' }
 ];
 @NgModule({
   imports: [

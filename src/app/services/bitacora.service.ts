@@ -1380,6 +1380,7 @@ export class BitacoraService {
 
   // Actualiza el tiempo acumulado de todas las actividades estas se muestam en (status, bitacora) HH:mm:ss
   public statusUpdate() {
+    console.log('In status update....');
     try {
       if (true) {
         this.boolIniciarStatusUpdate = false;
