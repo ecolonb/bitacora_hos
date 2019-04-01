@@ -1,23 +1,92 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<!-- <ion-header>
+    <ion-toolbar style="margin:0;padding: 0;">
         <ion-buttons slot="end">
-            <ion-button>
-                <ion-icon name="md-arrow"></ion-icon>
+            <ion-button slot="end" fill="clear" (click)="skip_()">
+                <span style="color: #27509b; font-weight: bold;">Saltar</span>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-</ion-header>
-
+</ion-header> -->
 <ion-content>
-    <ion-slides pager="true" [options]="slideOpts">
+    <div *ngIf="showSkip" style="position:absolute;z-index: 10;width:100%;background-color: white;">
+        <ion-button style="position:absolute;right: 0px;" fill="clear" (click)="skip_()">
+            <span style="color: #27509b; font-weight: bold;">Saltar</span>
+        </ion-button>
+    </div>
+    <ion-slides (ionSlideDidChange)="slideChange()" #welcomeSlider pager="true" [options]="slideOpts" style="height: 89%;padding: 0px;margin-top: 21px;">
+
         <ion-slide>
-            <h1>Slide 1</h1>
+            <ion-card>
+                <span text-center style="color:#27509b;margin-top: 15px;font-size: 30px;display:block;font-weight: bold;">Bienvenido</span>
+
+                <ion-card-content>
+                    <img src="/assets/images/michelin.png" alt="" />
+                </ion-card-content>
+            </ion-card>
         </ion-slide>
+
         <ion-slide>
-            <h1>Slide 2</h1>
+
+            <ion-card style="height: 90%;overflow-y: scroll;margin-top:0px;padding-bottom: 18px !important;">
+                <span text-center style="color:#27509b;margin-top: 15px;font-size: 21px;display:block;font-weight: bold;">Caracteristicas</span>
+
+                <ion-card-content> Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                    <div>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, blanditiis commodi! Totam nesciunt tenetur veniam saepe nemo maiores autem laborum, ex minus atque hic quae aliquid libero commodi, vitae culpa. Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Pariatur possimus delectus, repellat cupiditate eum, sed impedit sequi laudantium fuga ducimus quam ipsam voluptate, nostrum fugit aspernatur in. Cupiditate, minus magni? Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Veniam, corporis blanditiis odio repellendus mollitia delectus adipisci distinctio quod! Fuga obcaecati odio, facere, similique debitis ut nulla officia maiores repellat neque id ipsa doloremque amet voluptatum eaque beatae
+                        ex fugit non quo libero, eligendi magni. Ratione enim laboriosam et quidem eligendi adipisci, dolore ex dolorem natus perferendis! Officiis perferendis, ea, ratione minima consequuntur eligendi cum mollitia soluta eveniet repellat
+                        quisquam culpa esse ducimus et impedit? Fuga distinctio voluptates quo quae molestiae nisi blanditiis itaque explicabo quasi saepe. Et, reiciendis cupiditate, aut, fugit exercitationem facere maiores nam doloribus voluptate corporis
+                        veritatis. Id obcaecati eligendi atque cumque, velit blanditiis. Nisi, magnam iusto natus sed, quae nihil commodi maiores reiciendis saepe corrupti ducimus quam! Eligendi distinctio pariatur architecto illum doloribus placeat cum
+                        aliquid quos quod, autem repudiandae natus alias quia nemo provident commodi ex minus quis quam quidem. Reprehenderit nostrum ducimus quidem tenetur omnis, natus enim saepe. Quia obcaecati reprehenderit eveniet, delectus nisi dolore
+                        necessitatibus magnam quas. Voluptas officia obcaecati maiores qui placeat deleniti quam nesciunt a, debitis ipsum delectus repellendus similique. Rerum provident ex maiores illum voluptatibus id, voluptas, odio totam voluptate
+                        vitae minima consequuntur tempora expedita, maxime nisi doloribus! Optio laudantium odit voluptatem, animi tempora sint. Inventore id quis rerum optio nam accusamus similique qui! Neque unde officiis quia inventore ad asperiores
+                        corrupti dolor tempora eius dolorum minima voluptas impedit, amet ipsum, at nesciunt deserunt distinctio ab. Nesciunt sit incidunt, fugit non velit quos, autem, tempora magni quia iusto quod omnis harum totam et numquam quidem!
+                        Aliquam, at aliquid debitis doloremque dolores blanditiis eos nihil nostrum laudantium perspiciatis dicta optio non id iusto animi nam labore cumque! Voluptatum est magni doloremque assumenda optio quisquam illum libero minus,
+                        nam reiciendis quaerat distinctio? Rem nemo quas quae sit, iusto sapiente vel, quos vero non veritatis ducimus? Repellat, sit facilis culpa ducimus fugit expedita, perspiciatis dolores sint, rerum magnam nobis obcaecati! Ab, culpa
+                        dolore, nemo beatae doloribus nostrum, dolorem aut voluptas maiores provident dolores nihil quae vitae amet rem. Beatae aut cum nemo numquam quasi incidunt nisi facere velit laudantium, itaque unde accusamus iusto error ad qui,
+                        corporis mollitia porro. Quaerat, quisquam. Minus quibusdam illum non corporis doloribus tempora maiores ipsam reprehenderit quisquam ad, qui reiciendis impedit accusantium nostrum fugiat perferendis iusto laudantium eius sapiente
+                        placeat. Totam tempora, voluptatibus quibusdam nisi dolore nam architecto adipisci esse illo odit, iure molestiae quod maiores hic, nesciunt impedit.
+                    </div>
+                </ion-card-content>
+            </ion-card>
         </ion-slide>
+
         <ion-slide>
-            <h1>Slide 3</h1>
+            <ion-card style="height: 90%;overflow-y: scroll;margin-top:0px;padding-bottom: 10px;">
+                <img src="/assets/images/copiloto_logo.png" alt="" style="margin-top:20px;margin-bottom: 5px;margin-left: auto;margin-right: auto;" />
+                <ion-card-content>
+                    <span text-center style="color:#27509b;margin-top: 15px;font-size: 18px;display:block;font-weight: bold;">Terminos
+                        y condiciones</span>
+                    <article style="text-align: justify;">
+                        <p style="margin-top: 10px;">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis aperiam similique laudantium quis architecto animi recusandae maiores. Numquam exercitationem quae deserunt laboriosam, excepturi ab temporibus eveniet quos explicabo accusantium ullam.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ab. Nisi officiis optio asperiores dolor consequatur corporis ducimus velit ex, necessitatibus eum dicta adipisci nemo at in alias perferendis accusamus.
+                        </p>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis repudiandae, molestiae voluptate quisquam tempora totam maiores laudantium facilis voluptas porro aperiam placeat recusandae omnis mollitia labore ad reiciendis
+                                magni inventore.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta esse hic perspiciatis possimus veritatis dolorem maxime commodi beatae, ab molestiae.</li>
+                            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam quia rem sapiente debitis delectus, repudiandae itaque at atque omnis ad officiis maxime doloribus doloremque ipsa reprehenderit alias ratione quam veniam commodi
+                                consequuntur est aperiam! Nostrum facere fugit eius tenetur neque!</li>
+                            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat fugit error sed, provident, expedita minus est velit nam, impedit quaerat dolores eos maxime quis repudiandae.
+                            </li>
+                            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste delectus quos in deleniti, officiis nam voluptate distinctio asperiores modi ut ea qui odit ad accusamus repellendus nihil quia perspiciatis ex, nisi minima aliquam
+                                quaerat a optio quis. Distinctio, rerum repellendus?</li>
+                        </ul>
+                    </article>
+                </ion-card-content>
+            </ion-card>
         </ion-slide>
     </ion-slides>
+    <div style="position: absolute; bottom: 0px; display: table; width: 100%;height: 11%;">
+        <div style="display:table-cell;vertical-align:middle;padding: 0px 1% 0px 1%;">
+            <ion-button color="copiloto" expand="block" (click)="nextSlide()">
+                <span style="color: white;">Siguiente </span>
+                <ion-icon name="ios-arrow-forward" slot="end" style="color:white;"></ion-icon>
+            </ion-button>
+        </div>
+    </div>
 </ion-content>

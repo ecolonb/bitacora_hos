@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { UtilidadesService } from './services/utilidades.service'
-
+import { UiService } from './services/ui.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +25,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private router: Router,
     public navCtrl: NavController,
-    private utilidadesService: UtilidadesService
+    private utilidadesService: UtilidadesService,
+    private ui: UiService
   ) {
     this.initializeApp();
   }
@@ -33,6 +34,7 @@ export class AppComponent {
   initializeApp() {
 
     this.platform.ready().then(() => {
+      this.router.navigate(['welcome'], { replaceUrl: true });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       console.log('-->>>', this.utilidadesService.isoStringToSQLServerFormat(new Date().toISOString()));
@@ -41,14 +43,16 @@ export class AppComponent {
   }
   navToPage(UrlToNavigate: any) {
     console.log('NavTo: ', UrlToNavigate);
-    this.router.navigate([UrlToNavigate]);
+    this.router.navigateByUrl(UrlToNavigate);
   }
   logOut() {
     console.log('LogOut: ');
-    this.router.navigate(['login']);
+    this.router.navigate(['login'], { replaceUrl: true });
   }
   goBack() {
     // this.navCtrl.navigateBack('/route');
     this.navCtrl.navigateBack('/route');
   }
+
+  // angular router replaceurl
 }
