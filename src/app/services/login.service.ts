@@ -16,10 +16,13 @@ import { Platform } from '@ionic/angular';
 import { UsuarioModel } from '../models/usuario.model';
 import { AppConfiguracionService } from './app-configuracion.service';
 import { UsuarioService } from './usuario.service';
+import { BehaviorSubject } from 'rxjs';
 // import { filter, map, switchMap } from 'rxjs/operators';
 @Injectable()
 export class LoginService {
   // Declaracion de variables globales
+  //Variable to use on GUARDS
+  public authState = new BehaviorSubject(false)
   public objPermisos: any;
 
   public serverEndPoint: string = 's5';
@@ -30,6 +33,9 @@ export class LoginService {
   // Propiedades privadas
   // http://dev1.copiloto.com.mx
   private sesionOk: boolean = false;
+
+
+
   // private URL_: string = 'http://dev1.copiloto.com.mx/lab';
   private ComplementEndPoint: string = 'rest/api/Login';
 
@@ -72,7 +78,7 @@ export class LoginService {
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       };
       const dataSendform = ObjLoginDevice;
-      const serverEndPointConfig: string = "http://lab.micopiloto.com/dev5/"
+      const serverEndPointConfig: string = "http://dev1.copiloto.com.mx/lab/"
       // this.appConfiguracionProvider
       //   .getServerEndPoint()
       //   .toLowerCase();
@@ -203,6 +209,12 @@ export class LoginService {
     return cerrarSesionPromise;
   }
 
+  isAuthenticated() {
+    return this.authState.value;
+  }
+  setAuthenticate(newAuthState: boolean) {
+    this.authState.next(newAuthState);
+  }
   // ************* METODOS PRIVADOS *****************  //
 
   // Guarda datos de la sesion en LocalStorage

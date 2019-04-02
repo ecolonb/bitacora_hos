@@ -51,10 +51,9 @@ export class AppConfiguracionService {
   }
   public getServerEndPoint(): string {
     console.log('on get server endPoint')
-    return "http://lab.micopiloto.com/dev5/";
+    return "http://dev1.copiloto.com.mx/lab/rest";
     // return this.ServerEndPoint;
   }
-  
 
   public getToken(): string {
     return this.privateToken;
