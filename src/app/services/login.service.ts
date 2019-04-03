@@ -18,6 +18,8 @@ import { AppConfiguracionService } from './app-configuracion.service';
 import { UsuarioService } from './usuario.service';
 import { BehaviorSubject } from 'rxjs';
 // import { filter, map, switchMap } from 'rxjs/operators';
+import { UiService } from './ui.service';
+
 @Injectable()
 export class LoginService {
   // Declaracion de variables globales
@@ -45,7 +47,8 @@ export class LoginService {
     private storage: Storage,
     private platform: Platform,
     private appConfiguracionProvider: AppConfiguracionService,
-    private usuarioProvider: UsuarioService
+    private usuarioProvider: UsuarioService,
+    private ui: UiService
   ) { }
 
   // Funcion para validar sesion retorna un Obervable  -> cambiar metodo Implementar una promesa
@@ -97,12 +100,17 @@ export class LoginService {
       this.httpClient
         .post(urlEndPointComplety, dataSendform, HEADERS)
         .toPromise()
-        .then(RESULT_DATA => {
+        .then((RESULT_DATA: any) => {
           console.log('RESULT_DATA: ', RESULT_DATA);
+          if (RESULT_DATA.errorRequest == false && RESULT_DATA.mensaje == 'login_ok') {
+            this.ui.activeSideMenu();
+            this.authState.next(true);
+          }
           resolve(RESULT_DATA);
         })
         .catch(error => {
-          console.log('Error: ', error)
+          console.log('Error: ', error);
+          this.authState.next(false);
           reject(error);
         });
     });

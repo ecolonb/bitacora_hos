@@ -51,7 +51,7 @@ export class AppConfiguracionService {
   }
   public getServerEndPoint(): string {
     console.log('on get server endPoint')
-    return "http://dev1.copiloto.com.mx/lab/rest";
+    return "http://dev1.copiloto.com.mx/lab/";
     // return this.ServerEndPoint;
   }
 
