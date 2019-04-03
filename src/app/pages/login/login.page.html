@@ -15,13 +15,13 @@
             </h2>
         </ion-card-header>
         <ion-card-content>
-            <form #formLogin (submit)="loginUserAndPassword(formLogin)" method="POST">
+            <form #formLogin="ngForm" (ngSubmit)="loginUserAndPassword(formLogin)" method="POST">
                 <ion-list no-lines style="margin-bottom: 25px;">
                     <ion-item>
-                        <ion-input type="text" id="usuario" name="usuario" placeholder="Usuario"></ion-input>
+                        <ion-input type="text" id="usuario" name="usuario" placeholder="Usuario" ngModel></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-input type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña">
+                        <ion-input type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña" (keyup)="onKeyUp($event, formLogin)" ngModel>
                         </ion-input>
                     </ion-item>
                     <!-- <ion-item>

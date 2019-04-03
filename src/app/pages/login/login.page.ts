@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, AlertController, LoadingController, ModalController, Platform } from '@ionic/angular';
 import { LoginService } from '../../services/login.service';
 import { BitacoraService } from '../../services/bitacora.service';
@@ -11,6 +11,8 @@ import { ConfiguracionServicioPage } from '../configuracion-servicio/configuraci
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { LocalTimeActivitysService } from '../../services/local-time-activitys.service';
+import { NgForm } from '@angular/forms';
+
 // UniqueDeviceID
 @Component({
   selector: 'app-login',
@@ -19,7 +21,6 @@ import { LocalTimeActivitysService } from '../../services/local-time-activitys.s
 })
 export class LoginPage implements OnInit {
 
-  // @ViewChild(Slides) slides: Slides;
   public loading: any = undefined;;
   public configuracionPage: any = ConfiguracionPage;
   public myModal = undefined;
@@ -237,10 +238,13 @@ export class LoginPage implements OnInit {
   // }
   public async loginUserAndPassword(formData: any) {
     // this.LoginProvider.setAuthenticate(true);
-    console.log('---------------------->>>>>>>LoginUserAndPassword');
-    this.usuario = formData.usuario.value;
+    console.log('---------------------->>>>>>>LoginUserAndPassword=>>>>>=>>>=>', formData);
+    const { usuario, contrasenia } = formData.value;
+    console.log('usuario, contrasenia_ ', usuario, contrasenia);
+
+    this.usuario = formData.form.controls.usuario.value;
     this.usuario = this.usuario.trim();
-    this.contrasenia = formData.contrasenia.value;
+    this.contrasenia = formData.form.controls.contrasenia.value;
     this.loading = await this.loadingController.create({
       message: 'Iniciando sesión. Por favor espere...'
     });
@@ -388,6 +392,12 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  public onKeyUp(evt: any, frmLogin: NgForm) {
+    if (evt.keyCode === 13) {
+      frmLogin.ngSubmit.emit();
+    }
   }
 
 }

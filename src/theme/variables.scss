@@ -78,3 +78,8 @@
 ion-button {
     text-transform: initial;
 }
+
+ion-item {
+    --text-input-highlight-color-valid: #945252;
+    --text-input-highlight-color-invalid: #945252;
+}

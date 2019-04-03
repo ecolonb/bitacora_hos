@@ -166,7 +166,12 @@ export class BitacoraService {
     private geolocation: Geolocation,
     private conductorProvider: ConductorService,
     private syncUpProvider: SyncUpService
-  ) {}
+  ) {
+      // Timer para fechaHora actual
+      this.ctrlTimerCurrentDateTiem = setInterval(() => {
+        this.getDateTimeNow();
+      }, 1000);
+  }
 
   public getBitacora() {
     return this.BitacoraDataStorage;

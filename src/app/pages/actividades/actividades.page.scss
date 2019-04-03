@@ -37,7 +37,6 @@
     margin-right: 3.2%;
     height: 48px;
     text-transform: initial;
-    
 }
 
 .btnActionDescanso>span {
@@ -56,12 +55,15 @@
 .reloj {
     font-size: 5em;
     font-family: Courier, sans-serif;
-    color: #0a2c5a;
+    color: #21425f;
 }
 
 .actividadTitleSt {
+    display: block;
+    width: 100%;
     font-size: 2em;
-    color: #0a2c5a;
+    color: #21425f;
+    text-align: center;
 }
 
 .boton {
@@ -124,15 +126,14 @@
         font-size: 1.3em;
     }
 }
-// .ion-color-vibrant {
-    // copiloto: #27509b,
-    // white: white,
-    // md_tq: #4daeda,
-    // blue_menu: #409aff,
-    // success: #9bc46d,
-    // *** melon: #f5a063,
-    //*** midnight_blue: #0a2c5a,
-    // ****teal_blue: #5f8ab6
-//   }
 
- 
+// .ion-color-vibrant {
+// copiloto: #27509b,
+// white: white,
+// md_tq: #4daeda,
+// blue_menu: #409aff,
+// success: #9bc46d,
+// *** melon: #f5a063,
+//*** midnight_blue: #0a2c5a,
+// ****teal_blue: #5f8ab6
+//   }

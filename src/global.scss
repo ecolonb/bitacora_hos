@@ -40,7 +40,16 @@
 .ion-color-copiloto {
     --ion-color-base: #27509b;
     --ion-color-base-rgb: 255, 255, 0;
-    --ion-color-contrast: #000000;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 0, 0, 0;
+    --ion-color-shade: #e0e000;
+    --ion-color-tint: #ffff1a;
+}
+
+.ion-color-IconSideMenu {
+    --ion-color-base: #777777;
+    --ion-color-base-rgb: 255, 255, 0;
+    --ion-color-contrast: #ffffff;
     --ion-color-contrast-rgb: 0, 0, 0;
     --ion-color-shade: #e0e000;
     --ion-color-tint: #ffff1a;
@@ -164,3 +173,26 @@ modal-wrapper {
 .alert-button-inner {
     text-transform: initial !important;
 }
+
+.title-pagetab {
+    color: white !important;
+    text-align: center;
+}
+
+ion-menu-button {
+    color: white !important;
+    position: absolute;
+}
+
+.tab-selected {
+    color: white !important;
+}
+
+ion-tab-button {
+    color: #a09e9e !important;
+}
+
+// .ion-valid {
+//     border-bottom-color: #084fa0 !important;
+//     background-color: #9bc46d !important;
+// }

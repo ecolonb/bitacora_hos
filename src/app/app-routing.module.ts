@@ -1,14 +1,41 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
-  { path: '', canActivate: [AuthGuard], loadChildren: './tabs/tabs.module#TabsPageModule' },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  { path: 'welcome', loadChildren: './pages/welcome/welcome.module#WelcomePageModule' },
-  { path: 'loading', loadChildren: './pages/loading/loading.module#LoadingPageModule' },
-  { path: 'app', canActivate: [AuthGuard], loadChildren: './routing/auth-pages-routing.module#AuthPagesRoutingModule' },
-  { path: 'tabs', canActivate: [AuthGuard], loadChildren: './tabs/tabs.router.module#TabsPageRoutingModule' }
+  {
+    path: "",
+    canActivate: [AuthGuard],
+    loadChildren: "./tabs/tabs.module#TabsPageModule"
+  },
+  { path: "login", loadChildren: "./pages/login/login.module#LoginPageModule" },
+  {
+    path: "welcome",
+    loadChildren: "./pages/welcome/welcome.module#WelcomePageModule"
+  },
+  {
+    path: "loading",
+    loadChildren: "./pages/loading/loading.module#LoadingPageModule"
+  },
+  {
+    path: "app",
+    canActivate: [AuthGuard],
+    loadChildren: "./routing/auth-pages-routing.module#AuthPagesRoutingModule"
+  },
+  {
+    path: "tabs",
+    canActivate: [AuthGuard],
+    loadChildren: "./tabs/tabs.router.module#TabsPageRoutingModule"
+  },
+  {
+    path: "terminos",
+    loadChildren: "./pages/terminos/terminos.module#TerminosPageModule"
+  },
+  {
+    path: "aviso-de-privacidad",
+    loadChildren:
+      "./pages/aviso-de-privacidad/aviso-de-privacidad.module#AvisoDePrivacidadPageModule"
+  }
 ];
 
 /**
@@ -26,4 +53,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

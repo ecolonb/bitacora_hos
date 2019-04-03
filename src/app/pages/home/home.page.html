@@ -1,47 +1,46 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="copiloto">
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title text-center>Horas de servicio</ion-title>
+        <ion-title class="title-pagetab">Horas de servicio</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="container-home">
-    <div>
-        <ion-card>
-            <ion-card-header class="cardHeaderEvents">
-                Total de tiempos
-            </ion-card-header>
+    <ion-card style="border:0.7px solid #badff8;">
+        <ion-card-header class="cardHeaderEvents">
+            Total de tiempos
+        </ion-card-header>
 
-            <ion-list>
-                <ion-item class="itemCardResumen">
-                    Conducción
-                    <span item-end>
-            <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.segundosConduccionHhmmss }}
-          </span>
-                </ion-item>
-                <ion-item class="itemCardResumen">
-                    Descanso
-                    <span item-end>
-            <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.segundosDescansoHhmmss }}
-          </span>
-                </ion-item>
-                <ion-item class="itemCardResumen">
-                    Servicio
-                    <span item-end>
-            <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.strHorasServicio +
+        <ion-list lines="none" style="margin:0px;padding: 0px;">
+            <ion-item class="itemCardResumen" lines="none">
+                Conducción
+                <span slot="end">
+                    <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.segundosConduccionHhmmss }}
+                </span>
+            </ion-item>
+            <ion-item class="itemCardResumen">
+                Descanso
+                <span slot="end">
+                    <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.segundosDescansoHhmmss }}
+                </span>
+            </ion-item>
+            <ion-item class="itemCardResumen">
+                Servicio
+                <span slot="end">
+                    <ion-icon name="md-timer"></ion-icon> &nbsp; {{ bitacoraProvider.strHorasServicio +
         bitacoraProvider.strMinutosServicio
         + bitacoraProvider.strSegundosServicio }}
-          </span>
-                </ion-item>
-            </ion-list>
-            <span>
-        <!-- Zona horaria : {{ TimeZone }} <br> Minutos ofSet: {{ minutosTimeOfSet }} -->
-      </span>
-            <span class="actualizadoFooter"> {{ bitacoraProvider.fehoraActualSystem | date:'long':'GMT+00000':'es-mx'}}</span>
-        </ion-card>
-    </div>
+                </span>
+            </ion-item>
+        </ion-list>
+        <span>
+            <!-- ( date:'long':'GMT+00000':'es-mx') Zona horaria : {{ TimeZone }} <br> Minutos ofSet: {{ minutosTimeOfSet }} -->
+        </span>
+        <span class="actualizadoFooter">
+            {{ bitacoraProvider.fehoraActualSystem | date:'long':'GMT+00000':'es-mx'}}</span>
+    </ion-card>
     <div>
         <ion-slides pager="true" style="height: 100% !important;">
             <ion-slide>
