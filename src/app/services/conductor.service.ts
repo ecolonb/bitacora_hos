@@ -21,10 +21,10 @@ import { Platform } from '@ionic/angular';
 
 @Injectable()
 export class ConductorService {
-  public nombreConductor: string = '';
-  public apellidosConductor: string = '';
-  public numeroLicencia: string = '';
-  public tipoLicencia: string = '';
+  public nombreConductor = '';
+  public apellidosConductor = '';
+  public numeroLicencia = '';
+  public tipoLicencia = '';
   public vigenciaLicencia: Date;
   public objConductor: ConductorModel;
 
@@ -56,7 +56,7 @@ export class ConductorService {
     const promiseGuardaConductorData = new Promise((resolve, reject) => {
       // Guardando en LocalStorage y actualizando el status de horas invertidas
       if (this.platform.is('cordova')) {
-        // Dispositivo cordova is running
+        // Dispositivo android or ios is running
         if (
           this.objConductor &&
           this.objConductor !== null &&

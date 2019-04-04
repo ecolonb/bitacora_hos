@@ -25,10 +25,10 @@ import { ConductorService } from './conductor.service';
 })
 export class UnidadService {
   public arrObjUnidades: UnidadModel[] = [];
-  public cargarFromStorage: boolean = true;
+  public cargarFromStorage = true;
   // URL to request
   // public URL_: string = 'http://dev1.copiloto.com.mx/lab/rest/api/Unidad';
-  private ComplementEndPoint: string = 'rest/api/Unidad';
+  private ComplementEndPoint = 'rest/api/Unidad';
   constructor(
     public http: HttpClient,
     private conductorProvider: ConductorService,
@@ -75,7 +75,7 @@ export class UnidadService {
     const promiseGuardaUnidades = new Promise((resolve, reject) => {
       // Guardando en LocalStorage y actualizando el status de horas invertidas
       if (this.platform.is('cordova')) {
-        // Dispositivo cordova is running
+        // Dispositivo android or ios is running
         this.storage.set('ObjUnidades', JSON.stringify(this.arrObjUnidades));
         resolve(true);
       } else {

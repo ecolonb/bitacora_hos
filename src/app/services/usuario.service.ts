@@ -58,7 +58,7 @@ export class UsuarioService {
       if (this.platform.is('cordova')) {
         this.storage.ready().then(() => {
           // Get items from Storage
-          this.storage.get('ObjUsuarioData').then((ObjUsuarioDataStorage) => {
+          this.storage.get('ObjUsuarioData').then(ObjUsuarioDataStorage => {
             this.ObjUsuarioData = JSON.parse(ObjUsuarioDataStorage);
             resolve();
           });

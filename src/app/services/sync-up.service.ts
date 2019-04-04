@@ -39,12 +39,11 @@ export class SyncUpService {
   // private URL_SyncAllActivitys: string =
   //   'http://dev1.copiloto.com.mx/lab/rest/api/sync_all_activitys';
 
-  private ComplementEndPointService: string = 'rest/api/nuevo_servicio';
-  private ComplementEndPointAllServices: string = 'rest/api/sync_all_services';
-  private ComplementEndPointAllActivitys: string =
-    'rest/api/sync_all_activitys';
-  private statusRequestActivitys: boolean = false;
-  private statusRequestServices: boolean = false;
+  private ComplementEndPointService = 'rest/api/nuevo_servicio';
+  private ComplementEndPointAllServices = 'rest/api/sync_all_services';
+  private ComplementEndPointAllActivitys = 'rest/api/sync_all_activitys';
+  private statusRequestActivitys = false;
+  private statusRequestServices = false;
   constructor(
     public http: HttpClient,
     private platform: Platform,
@@ -60,12 +59,16 @@ export class SyncUpService {
     GurdarStorage: boolean
   ): Promise<any> {
     const promiseSetActivity = new Promise((resolve, reject) => {
+      console.log('public setActivityToSend: ');
       if (
         this.ActivitysToSync &&
         this.ActivitysToSync !== null &&
         this.ActivitysToSync !== undefined &&
         this.ActivitysToSync.length > 0
       ) {
+        console.log(
+          'this.ActivitysToSync &&        this.ActivitysToSync !== null &&        this.ActivitysToSync !== undefined &&        this.ActivitysToSync.length > 0'
+        );
         this.ActivitysToSync.push(ObjItemBitacora);
         if (GurdarStorage) {
           this.setActivitysFromStorage()
@@ -101,7 +104,7 @@ export class SyncUpService {
   public deleteSynchronizedServices(
     objSynchronizedServices: any
   ): Promise<any> {
-    let indexSeriviceToSync: number = 0;
+    let indexSeriviceToSync = 0;
     const promiseDeleteSS = new Promise((resolve, reject) => {
       try {
         for (const SynchronizedService of objSynchronizedServices.SynchronizedServices) {
@@ -127,7 +130,7 @@ export class SyncUpService {
     return promiseDeleteSS;
   }
   public deleteSynchonizedActivitys(RequestData: any) {
-    let Index: number = 0;
+    let Index = 0;
     try {
       if (
         RequestData &&
@@ -269,16 +272,19 @@ export class SyncUpService {
   public checkServiceToSend(
     objServicioToSend?: ServicioToSendModel
   ): Promise<any> {
+    console.log('On check service to send!');
     const promiseChkServiceToSend = new Promise((resolve, reject) => {
       this.getServiciosToSyncStorage()
         .then(() => {
           try {
+            console.log('this.getServiciosToSyncStorage() resolve ------->>>');
             if (
               this.ServiciosToSync &&
               this.ServiciosToSync !== null &&
               this.ServiciosToSync !== undefined &&
               this.ServiciosToSync.length > 0
             ) {
+              console.log('Passing IF after TRY....--------------->>>>');
               if (
                 objServicioToSend &&
                 objServicioToSend !== null &&
@@ -347,23 +353,30 @@ export class SyncUpService {
                 .catch(error => {
                   reject();
                 });
+            } else {
+              console.log('ELSE AFTER TRY------>>>;>>Resolving true');
+              return resolve(true);
             }
           } catch (error) {
+            console.log('Error =>>>', error);
             reject();
           }
         })
         .catch(Err => {
+          console.log('Reject error: ', Err);
           reject();
         });
     });
     return promiseChkServiceToSend;
   }
   public getServiciosToSyncStorage() {
+    console.log('getServiciosToSyncStorage.------------->>>');
     const storageInfoPromise = new Promise((resolve, reject) => {
       if (this.platform.is('cordova')) {
+        console.log('Platform android or ios!---->>>>>>');
         this.storage.ready().then(() => {
           // Get items from Storage
-          this.storage.get('ObjServiciosToSync').then((ObjServiciosToSync) => {
+          this.storage.get('ObjServiciosToSync').then(ObjServiciosToSync => {
             if (ObjServiciosToSync) {
               this.ServiciosToSync = JSON.parse(ObjServiciosToSync);
               resolve(true);
@@ -374,9 +387,16 @@ export class SyncUpService {
           });
         });
       } else {
-        this.ServiciosToSync = JSON.parse(
-          localStorage.getItem('ObjServiciosToSync')
-        );
+        console.log('Else this.platform.is=>  NOT android or ios');
+        try {
+          this.ServiciosToSync = JSON.parse(
+            localStorage.getItem('ObjServiciosToSync')
+          );
+        } catch (error) {
+          console.log('error --->>>>>', error);
+          return reject(error);
+        }
+        console.log('this.ServiciosToSync: ;', this.ServiciosToSync);
         resolve(true);
       }
     });
@@ -395,7 +415,7 @@ export class SyncUpService {
             this.ActivitysToSync.length > 0
           ) {
             this.syncActivitystoServer()
-              .then((DataRequest) => {
+              .then(DataRequest => {
                 resolve(DataRequest);
               })
               .catch(() => {
@@ -416,12 +436,15 @@ export class SyncUpService {
   // ******** Funciones publicas de Actividades Sync
   // Recibe el Obj actividad
   /*
-  *
-  */
+   *
+   */
   public syncNewActivity(
     Activity: BitacoraModel,
     Terminado: boolean
   ): Promise<any> {
+    console.log(
+      'xxxxxxxxxxxxxxxxxxxxOn sync new activity--------------------------->>>>>'
+    );
     const promiseChkActivityToSend = new Promise((resolve, reject) => {
       try {
         if (!Terminado) {
@@ -442,7 +465,7 @@ export class SyncUpService {
                     // ok
                     this.ActivitysToSync.push(Activity);
                     this.prepareActivityToSync()
-                      .then((DataRequest) => {
+                      .then(DataRequest => {
                         // ok
                         resolve(DataRequest);
                       })
@@ -458,11 +481,11 @@ export class SyncUpService {
                     // err
                     this.ActivitysToSync.push(Activity);
                     this.prepareActivityToSync()
-                      .then((DataRequest) => {
+                      .then(DataRequest => {
                         // ok
                         resolve(DataRequest);
                       })
-                      .catch((Error_) => {
+                      .catch(Error_ => {
                         // err
                         reject();
                       });
@@ -473,18 +496,18 @@ export class SyncUpService {
                 this.ActivitysToSync = [];
                 this.ActivitysToSync.push(Activity);
                 this.prepareActivityToSync()
-                  .then((DataRequest) => {
+                  .then(DataRequest => {
                     // ok
                     resolve(DataRequest);
                   })
-                  .catch((Eror_) => {
+                  .catch(Eror_ => {
                     // err
                     reject();
                   });
               }
               // REALIZAR PETICION POST ENVIAR DATA
             })
-            .catch((Error_) => {
+            .catch(Error_ => {
               reject();
             });
         } else {
@@ -534,17 +557,17 @@ export class SyncUpService {
         this.ActivitysToSync.length > 0
       ) {
         this.syncActivitystoServer()
-          .then((RESPONSE_DATA) => {
+          .then(RESPONSE_DATA => {
             // Aqui eliminar actividades sincronizadas
             this.setActivitysFromStorage()
               .then(() => {
                 resolve(RESPONSE_DATA);
               })
-              .catch((Error_) => {
+              .catch(Error_ => {
                 reject();
               });
           })
-          .catch((ErrorCatch) => {
+          .catch(ErrorCatch => {
             this.setActivitysFromStorage()
               .then(() => {
                 reject();
@@ -591,11 +614,11 @@ export class SyncUpService {
           this.http
             .post(UrlEndPointCompletly, FormDataSend, HEADERS)
             .toPromise()
-            .then((RESULT_DATA) => {
+            .then(RESULT_DATA => {
               this.deleteSynchonizedActivitys(RESULT_DATA);
               resolve(RESULT_DATA);
             })
-            .catch((ErrorPromise) => {
+            .catch(ErrorPromise => {
               this.statusRequestActivitys = false;
               reject(ErrorPromise);
             });
@@ -611,12 +634,14 @@ export class SyncUpService {
     return promiseSyncAllActivitys;
   }
   public getActivitysFromStorage(): Promise<any> {
+    console.log('----------->>>>> getActivitysFromStorage ---->>>');
     const promiseGetActivtyStorage = new Promise((resolve, reject) => {
       // Obetener las actividades del storage
       if (this.platform.is('cordova')) {
+        console.log('the platform is o0rdova');
         this.storage.ready().then(() => {
           // Get items from Storage
-          this.storage.get('ObjActivitysToSync').then((ObjActivitysToSync) => {
+          this.storage.get('ObjActivitysToSync').then(ObjActivitysToSync => {
             if (ObjActivitysToSync) {
               this.ActivitysToSync = JSON.parse(ObjActivitysToSync);
               resolve(true);
@@ -627,6 +652,7 @@ export class SyncUpService {
           });
         });
       } else {
+        console.log('The platform is WebBrowser');
         this.ActivitysToSync = JSON.parse(
           localStorage.getItem('ObjActivitysToSync')
         );
@@ -639,7 +665,7 @@ export class SyncUpService {
     const setPromiseActivitysStorage = new Promise((resolve, reject) => {
       // guardar actividades en Storage
       if (this.platform.is('cordova')) {
-        // Dispositivo cordova is running
+        // Dispositivo android or ios is running
         this.storage.set(
           'ObjActivitysToSync',
           JSON.stringify(this.ActivitysToSync)
@@ -675,7 +701,7 @@ export class SyncUpService {
     const promiseSetServicioToSync = new Promise((resolve, reject) => {
       // Guardando en LocalStorage y actualizando el status de horas invertidas
       if (this.platform.is('cordova')) {
-        // Dispositivo cordova is running
+        // Dispositivo android or ios is running
         this.storage.set(
           'ObjServiciosToSync',
           JSON.stringify(this.ServiciosToSync)

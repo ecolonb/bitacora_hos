@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, AlertController, LoadingController, ModalController, Platform } from '@ionic/angular';
+import {
+  NavController,
+  AlertController,
+  LoadingController,
+  ModalController,
+  Platform
+} from '@ionic/angular';
 import { LoginService } from '../../services/login.service';
 import { BitacoraService } from '../../services/bitacora.service';
 import { ConductorService } from '../../services/conductor.service';
@@ -17,16 +23,15 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-
-  public loading: any = undefined;;
+  public loading: any = undefined;
   public configuracionPage: any = ConfiguracionPage;
   public myModal = undefined;
-  public usuario: string = '';
-  public contrasenia: string = '';
-  public strLoginOkProvider: string = 'false';
+  public usuario = '';
+  public contrasenia = '';
+  public strLoginOkProvider = 'false';
   public configuracionServicioPage: any = ConfiguracionServicioPage;
   // public menuPage: any = MenuPage;
   // public uidDevice: string;
@@ -52,8 +57,8 @@ export class LoginPage implements OnInit {
   ) {
     this.strLoginOkProvider = 'false';
     this.LoginProvider.setActivo(false)
-      .then(() => { })
-      .catch(() => { });
+      .then(() => {})
+      .catch(() => {});
     if (this.platform.is('cordova')) {
       this.uniqueDeviceID
         .get()
@@ -73,7 +78,7 @@ export class LoginPage implements OnInit {
           // this.versionPlatformDevice = String(this.device.version);
         })
         .catch((error: any) => {
-          // console.log(error);
+          console.log('Catch Error--->>>>: ', error);
         });
     } else {
       this.ObjLoginDevice = {
@@ -95,10 +100,10 @@ export class LoginPage implements OnInit {
       .then(() => {
         this.syncUpProvider
           .checkActivitysToSend()
-          .then(() => { })
-          .catch(() => { });
+          .then(() => {})
+          .catch(() => {});
       })
-      .catch(() => { });
+      .catch(() => {});
   }
   ionViewWillEnter() {
     console.log('Will enter: ');
@@ -131,16 +136,16 @@ export class LoginPage implements OnInit {
         // }
         this.localTimeActivitysProvider
           .getDataFromServer(false)
-          .then((ResposeData) => {
-            // console.log('ResposeData:', ResposeData);
+          .then(ResposeData => {
+            console.log('ResposeData localTimeActivitysProvider---->>>>:', ResposeData);
           })
-          .catch((ErrorRequest) => {
-            // console.log('ResposeData:', ErrorRequest);
+          .catch(ErrorRequest => {
+            console.log('ResposeData: localTimeActivitysProvider ---->>>', ErrorRequest);
           });
         this.unidadProvider.cargarFromStorage = false;
-        console.log('Aqui redireccionar: configurar servicio')
-        //this.navCtrl.setRoot(this.configuracionServicioPage);
-      } catch (error) { }
+        console.log('Aqui redireccionar: configurar servicio');
+        // this.navCtrl.setRoot(this.configuracionServicioPage);
+      } catch (error) {}
     }
   }
   // public continuar(formData: any) {
@@ -238,18 +243,19 @@ export class LoginPage implements OnInit {
   // }
   public async loginUserAndPassword(formData: any) {
     // this.LoginProvider.setAuthenticate(true);
-    console.log('---------------------->>>>>>>LoginUserAndPassword=>>>>>=>>>=>', formData);
-    const { usuario, contrasenia } = formData.value;
-    console.log('usuario, contrasenia_ ', usuario, contrasenia);
+    console.log(
+      '---------------------->>>>>>>LoginUserAndPassword=>>>>>=>>>=>',
+      formData
+    );
 
     this.usuario = formData.form.controls.usuario.value;
     this.usuario = this.usuario.trim();
     this.contrasenia = formData.form.controls.contrasenia.value;
+
     this.loading = await this.loadingController.create({
       message: 'Iniciando sesión. Por favor espere...'
     });
     if (this.usuario === '' || this.contrasenia === '') {
-
       const alert = await this.alertController.create({
         header: 'Error!',
         message: '¡Favor de ingresar Usuario y Contraseña!',
@@ -273,7 +279,7 @@ export class LoginPage implements OnInit {
     this.ObjLoginDevice.user = this.usuario.trim().toLocaleLowerCase();
     this.ObjLoginDevice.password = btoa(this.contrasenia.trim());
     this.LoginProvider.loginUserAndPaswword(this.ObjLoginDevice)
-      .then(async (RESULT_PROVIDER) => {
+      .then(async RESULT_PROVIDER => {
         // Aqui se procesa la información que se recibe desde el Servidor
         if (RESULT_PROVIDER.errorRequest === true) {
           this.loading.dismiss();
@@ -308,7 +314,7 @@ export class LoginPage implements OnInit {
             });
         }
       })
-      .catch(async (ERROR) => {
+      .catch(async ERROR => {
         if (ERROR.ok === false) {
           this.loading.dismiss();
           // const alert = this.alertCtrl.create({
@@ -328,7 +334,8 @@ export class LoginPage implements OnInit {
           // alert.present();
           const alert = await this.alertController.create({
             header: 'Error de comunicación',
-            message: 'Fue imposible conectarse al servidor, favor de revisar tu conexión a internet.',
+            message:
+              'Fue imposible conectarse al servidor, favor de revisar tu conexión a internet.',
             buttons: [
               {
                 text: 'OK',
@@ -363,7 +370,7 @@ export class LoginPage implements OnInit {
     // this.myModal.dismiss();
   }
   async presentAlertPrompt() {
-    const textEx = "http://was.asasa.ssasa.";
+    const textEx = 'http://was.asasa.ssasa.';
     const alert = await this.alertController.create({
       header: 'Configuración',
       inputs: [
@@ -382,9 +389,10 @@ export class LoginPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Guardar',
-          handler: (data) => {
+          handler: data => {
             console.log('Confirm Ok', data);
           }
         }
@@ -399,5 +407,4 @@ export class LoginPage implements OnInit {
       frmLogin.ngSubmit.emit();
     }
   }
-
 }

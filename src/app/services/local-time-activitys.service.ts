@@ -57,7 +57,7 @@ export class LocalTimeActivitysService {
     private conductorProvider: ConductorService,
     private utilidadesProvider: UtilidadesService,
     private appConfiguracionProvider: AppConfiguracionService
-  ) { }
+  ) {}
   public activitysSeparator(): Promise<any> {
     const promiseActivitysSeparator = new Promise((resolve, reject) => {
       try {
@@ -132,7 +132,7 @@ export class LocalTimeActivitysService {
         InfinityScrol,
         Token
       )
-        .then((ResponseData) => {
+        .then(ResponseData => {
           // this.AllDaysUTC.diasLocal
           const DiaItem: DiasLocalItemTimeModel = {
             Terminado: false,
@@ -158,7 +158,7 @@ export class LocalTimeActivitysService {
 
           resolve(true);
         })
-        .catch((errorRequest) => {
+        .catch(errorRequest => {
           reject(errorRequest);
         });
     });
@@ -179,7 +179,7 @@ export class LocalTimeActivitysService {
       const HEADERS = {
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       };
-      const Dias: number = 2;
+      const Dias = 2;
       const dataSendform: InfinityScrollRequestModel = {
         Dias,
         FechaInicio,
@@ -193,14 +193,16 @@ export class LocalTimeActivitysService {
       const UrlEndPointCompletly: string =
         this.appConfiguracionProvider.getServerEndPoint() +
         this.ComplementEndPoint;
-
+      console.log('URL: ' + UrlEndPointCompletly);
       this.http
         .post(UrlEndPointCompletly, dataSendform, HEADERS)
         .toPromise()
-        .then((RESULT_DATA) => {
+        .then(RESULT_DATA => {
+          console.log('RESULT_DATA --->>>>', RESULT_DATA);
           resolve(RESULT_DATA);
         })
-        .catch((error) => {
+        .catch(error => {
+          console.log('CATCH_DATA --->>>>', error);
           reject(error);
         });
     });

@@ -23,23 +23,24 @@ import { UiService } from './ui.service';
 @Injectable()
 export class LoginService {
   // Declaracion de variables globales
-  //Variable to use on GUARDS
-  public authState = new BehaviorSubject(false)
+  // Variable to use on GUARDS
+  public authState = new BehaviorSubject(false);
   public objPermisos: any;
 
-  public serverEndPoint: string = 's5';
+  public serverEndPoint = 's5';
+
+  // Pagina para redireccionar:
+  public pageRedirect = 'actividades';
 
   // Variables de usuarioLogin
   public objSesionRespuesta: UsuarioModel;
 
   // Propiedades privadas
   // http://dev1.copiloto.com.mx
-  private sesionOk: boolean = false;
-
-
+  private sesionOk = false;
 
   // private URL_: string = 'http://dev1.copiloto.com.mx/lab';
-  private ComplementEndPoint: string = 'rest/api/Login';
+  private ComplementEndPoint = 'rest/api/Login';
 
   // Constructor de clase
   constructor(
@@ -49,7 +50,7 @@ export class LoginService {
     private appConfiguracionProvider: AppConfiguracionService,
     private usuarioProvider: UsuarioService,
     private ui: UiService
-  ) { }
+  ) {}
 
   // Funcion para validar sesion retorna un Obervable  -> cambiar metodo Implementar una promesa
   // public validarSesion(
@@ -74,14 +75,14 @@ export class LoginService {
 
   // LOG IN USER_PASSWORD method POST -> Api RESTFul
   public loginUserAndPaswword(ObjLoginDevice: any): Promise<any> {
-    console.log('/ObjLoginDevice: ', ObjLoginDevice)
-    let urlEndPointComplety: string = '';
+    console.log('/ObjLoginDevice: ', ObjLoginDevice);
+    let urlEndPointComplety = '';
     const promiseLoginUserAndPaswword = new Promise((resolve, reject) => {
       const HEADERS = {
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       };
       const dataSendform = ObjLoginDevice;
-      const serverEndPointConfig: string = "http://dev1.copiloto.com.mx/lab/"
+      const serverEndPointConfig = 'http://dev1.copiloto.com.mx/lab/';
       // this.appConfiguracionProvider
       //   .getServerEndPoint()
       //   .toLowerCase();
@@ -102,14 +103,19 @@ export class LoginService {
         .toPromise()
         .then((RESULT_DATA: any) => {
           console.log('RESULT_DATA: ', RESULT_DATA);
-          if (RESULT_DATA.errorRequest == false && RESULT_DATA.mensaje == 'login_ok') {
+          if (
+            RESULT_DATA.errorRequest == false &&
+            RESULT_DATA.mensaje == 'login_ok'
+          ) {
             this.ui.activeSideMenu();
+            this.pageRedirect = 'ServiceConfig';
             this.authState.next(true);
           }
           resolve(RESULT_DATA);
         })
         .catch(error => {
           console.log('Error: ', error);
+          this.pageRedirect = 'login';
           this.authState.next(false);
           reject(error);
         });
@@ -164,6 +170,7 @@ export class LoginService {
 
   // Carga datos de la sesion desde el LocalStorage
   public cargarStorage() {
+    console.log('Cargando storage.....');
     this.sesionOk = false;
     const storagePromise = new Promise((resolve, reject) => {
       if (this.platform.is('cordova')) {
@@ -172,16 +179,44 @@ export class LoginService {
           this.storage
             .get('sesionOk')
             .then(sesionOkStorage => {
+              console.log('sesionOkStorage: -------->>>>', sesionOkStorage);
               this.sesionOk = Boolean(sesionOkStorage);
-              resolve();
+              if (this.sesionOk) {
+                console.log(
+                  'OKOKOKOKOKOKOKOKO=>>>>>>>>>> validar si esta en SERVICIO o NO'
+                );
+                this.ui.activeSideMenu();
+                this.pageRedirect = 'ServiceConfig';
+                this.authState.next(true);
+              } else {
+                this.ui.desactiveSideMenu();
+                this.pageRedirect = 'login';
+                this.authState.next(false);
+              }
+              return resolve();
             })
             .catch(() => {
+              this.ui.desactiveSideMenu();
+              this.pageRedirect = 'login';
+              this.authState.next(false);
               this.sesionOk = false;
+              return reject();
             });
         });
       } else {
         this.sesionOk = Boolean(localStorage.getItem('sesionOk'));
-        resolve();
+        console.log('sesionOk: ', this.sesionOk);
+        if (this.sesionOk) {
+          console.log(
+            'OKOKOKOKOKOKOKOKO=>>>>>>>>>> validar si esta en SERVICIO o NO'
+          );
+          this.ui.activeSideMenu();
+          this.pageRedirect = 'ServiceConfig';
+          this.authState.next(true);
+        } else {
+          this.authState.next(false);
+        }
+        return resolve();
       }
     });
     return storagePromise;
@@ -194,23 +229,23 @@ export class LoginService {
         // Dispositivo
         try {
           this.setActivo(false)
-            .then(() => { })
-            .catch(() => { });
+            .then(() => {})
+            .catch(() => {});
           this.storage.remove('sesionOk');
           this.storage.remove('ObjUnidades');
           this.storage.remove('ObjConductor');
-        } catch (error) { }
+        } catch (error) {}
         resolve();
       } else {
         // Desktop webBrowser
         try {
           this.setActivo(false)
-            .then(() => { })
-            .catch(() => { });
+            .then(() => {})
+            .catch(() => {});
           localStorage.removeItem('sesionOk');
           localStorage.removeItem('ObjUnidades');
           localStorage.removeItem('ObjConductor');
-        } catch (error) { }
+        } catch (error) {}
         resolve();
       }
     });
@@ -235,7 +270,7 @@ export class LoginService {
         } else {
           this.storage.remove('sesionOk');
         }
-        resolve();
+        return resolve(true);
       } else {
         // Desktop webBrowser
         if (this.sesionOk === true) {
@@ -244,7 +279,7 @@ export class LoginService {
           // localStorage.removeItem('sesionOk');
           localStorage.removeItem('sesionOk');
         }
-        resolve();
+        return resolve(true);
       }
     });
     return savePromise;

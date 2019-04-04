@@ -170,7 +170,8 @@ modal-wrapper {
     }
 }
 
-.alert-button-inner {
+.alert-button>.alert-button-inner,
+.alert-button>.sc-ion-alert-md {
     text-transform: initial !important;
 }
 

@@ -25,14 +25,14 @@ import { AppConfiguracionModel } from '../models/app-configuracion.model';
 
 @Injectable()
 export class AppConfiguracionService {
-  public ServerEndPoint: string = 'http';
+  public ServerEndPoint = 'http';
   // Objeto de configuracion del server endpoint
   private objConfigApp: AppConfiguracionModel;
   // Token de usuario/conductor con el cual realizar peticiones
-  private privateToken: string = '---ABCD---';
+  private privateToken = '---ABCD---';
 
   // http://dev1.copiloto.com.mx/lab/rest/api/check_server_endpoint/2786
-  private ComplementEndPoint: string = 'rest/api/check_server_endpoint/2786';
+  private ComplementEndPoint = 'rest/api/check_server_endpoint/2786';
 
   // Constructor de clase
   constructor(
@@ -50,8 +50,8 @@ export class AppConfiguracionService {
     });
   }
   public getServerEndPoint(): string {
-    console.log('on get server endPoint')
-    return "http://dev1.copiloto.com.mx/lab/";
+    console.log('on get server endPoint');
+    return 'http://dev1.copiloto.com.mx/lab/';
     // return this.ServerEndPoint;
   }
 
@@ -80,10 +80,10 @@ export class AppConfiguracionService {
           // info guardada
           resolve();
         })
-        .catch((ErrorCatch) => {
+        .catch(ErrorCatch => {
           reject();
         });
-    }).catch((ErrorCatch) => { });
+    }).catch(ErrorCatch => {});
 
     return promiseSetToken;
   }
@@ -107,7 +107,7 @@ export class AppConfiguracionService {
       if (this.platform.is('cordova')) {
         this.storage.ready().then(() => {
           // Get items from Storage
-          this.storage.get('Token').then((Token) => {
+          this.storage.get('Token').then(Token => {
             if (Token) {
               this.privateToken = String(Token);
             } else {
@@ -131,10 +131,10 @@ export class AppConfiguracionService {
       this.http
         .get(URLToCheck)
         .toPromise()
-        .then((ResponseData) => {
+        .then(ResponseData => {
           resolve(ResponseData);
         })
-        .catch((ErrorRequest) => {
+        .catch(ErrorRequest => {
           reject(ErrorRequest);
         });
     });
@@ -148,7 +148,7 @@ export class AppConfiguracionService {
       if (ServerEndPoint !== null && ServerEndPoint !== undefined) {
         // = ServerEndPoint.trim().toLowerCase();
         ServerEndPoint = ServerEndPoint.trim().toLowerCase();
-        let URLCompletly: string = '';
+        let URLCompletly = '';
         // format url endPoint
         // validate ServerEndPoint
         if (
@@ -177,7 +177,7 @@ export class AppConfiguracionService {
         }
 
         this.checkServerEndPoint(URLCompletly)
-          .then((DataResponse) => {
+          .then(DataResponse => {
             // Validar Server endPoint
             if (
               this.objConfigApp &&
@@ -265,7 +265,7 @@ export class AppConfiguracionService {
       if (this.platform.is('cordova')) {
         // Dispositivo
         this.platform.ready().then(() => {
-          this.storage.get('ObjConfigApp').then((ObjConfigApp) => {
+          this.storage.get('ObjConfigApp').then(ObjConfigApp => {
             this.objConfigApp = JSON.parse(ObjConfigApp);
             try {
               this.privateToken = this.objConfigApp.token;
